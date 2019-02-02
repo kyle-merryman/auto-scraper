@@ -8,9 +8,14 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // Create the headlineSchema with our schema class
-var headlineSchema = new Schema({
+var petitionSchema = new Schema({
+  keyword: {
+    type: String,
+    required: true,
+    //unique: { index: { unique: true } }
+  },
   // headline, a string, must be entered
-  headline: {
+  title: {
     type: String,
     required: true,
     //unique: { index: { unique: true } }
@@ -37,7 +42,7 @@ var headlineSchema = new Schema({
 });
 
 // Create the Headline model using the headlineSchema
-var Headline = mongoose.model("Headline", headlineSchema);
+var Petition  = mongoose.model("Petition", petitionSchema);
 
 // Export the Headline model
-module.exports = Headline;
+module.exports = Petition;

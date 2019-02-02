@@ -40,9 +40,11 @@ mongoose.connect(MONGODB_URI);
 
 // Listen on the port
 app.listen(PORT, function() {
-  cron.schedule("*/30 * * * * *", function(){
+  cron.schedule("*/3 * * * * *", function(){
   console.log("Listening on port: " + PORT);
-  fetchController.scrapeHeadlines();
-  //console.log(fetchController.scrapeHeadlines());
+  fetchController.scrapePetitions();
+  fetchController.scrapeEvents();
+  console.log(`These are the scrape events` + fetchController.scrapeEvents());
+  //console.log(`These are the scrape events ${fetchController.scrapeEvents()}`);
   });
 });

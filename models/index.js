@@ -1,3 +1,4 @@
 module.exports = {
-    Headline: require("./Headline")
-};
+    Petition: require("./Petition"),
+    Event: require("./Event")
+  };
