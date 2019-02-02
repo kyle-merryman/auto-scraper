@@ -1,0 +1,27 @@
+{
+  "name": "auto-scraper",
+  "version": "1.0.0",
+  "description": "Updates the database with data scraped from multiple sites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyle-merryman/auto-scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyle-merryman/auto-scraper/issues"
+  },
+  "homepage": "https://github.com/kyle-merryman/auto-scraper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.9",
+    "node-cron": "^2.0.3"
+  }
+}
