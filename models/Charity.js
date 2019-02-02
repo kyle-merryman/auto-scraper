@@ -8,15 +8,15 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // Create the headlineSchema with our schema class
-var eventSchema = new Schema({
+var charitySchema = new Schema({
   // headline, a string, must be entered
-  title: {
+  keyword: {
     type: String,
     required: true,
     //unique: { index: { unique: true } }
   },
   // summary, a string, must be entered
-  summary: {
+  name: {
     type: String,
     required: true
   },
@@ -37,7 +37,7 @@ var eventSchema = new Schema({
 });
 
 // Create the Headline model using the headlineSchema
-var Event = mongoose.model("Event", eventSchema);
+var Charity = mongoose.model("Charity", charitySchema);
 
 // Export the Headline model
-module.exports = Event;
+module.exports = Charity;

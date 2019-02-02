@@ -9,6 +9,7 @@ const cron = require("node-cron");
 var mongoose = require("mongoose");
 //var exphbs = require("express-handlebars");
 var fetchController = require("./controllers/fetch");
+var charityPopulator = require("./scripts/charityOrg");
 
 // Set up our port to be either the host's designated port, or 3000
 var PORT = process.env.PORT || 3000;
@@ -42,6 +43,7 @@ mongoose.connect(MONGODB_URI);
 app.listen(PORT, function() {
   cron.schedule("*/3 * * * * *", function(){
   console.log("Listening on port: " + PORT);
+  charityPopulator();
   fetchController.scrapePetitions();
   fetchController.scrapeEvents();
   console.log(`These are the scrape events` + fetchController.scrapeEvents());
