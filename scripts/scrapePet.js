@@ -55,7 +55,7 @@ var scrapePet = function() {
         // Initialize an object we will push to the articles array
 
         var dataToAdd = {
-          keyword: "climate_change",
+          keyword: "climate-change",
           title: titleNeat,
           summary: sumNeat,
           url: "https://www.change.org" + url

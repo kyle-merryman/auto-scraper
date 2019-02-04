@@ -20,7 +20,7 @@ var PORT = process.env.PORT || 3000;
 var app = express();
 
 // Require our routes
-//var routes = require("./routes");
+// var routes = require("./routes");
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -33,7 +33,7 @@ app.use(express.json());
 app.set("view engine", "handlebars");*/
 
 // Have every request go through our route middleware
-//app.use(routes);
+// app.use(routes);
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -43,6 +43,11 @@ mongoose.connect(MONGODB_URI);
 
 // Listen on the port
 app.listen(PORT, function() {
+  db.Charity.remove({}, function(err) { 
+    console.log("collection 'Event' removed");
+  });
+  charityPopulator();
+
   cron.schedule("*/10 * * * * *", function(){
   console.log("Listening on port: " + PORT);
 
@@ -52,6 +57,7 @@ app.listen(PORT, function() {
   db.Event.remove({}, function(err) { 
     console.log("collection 'Event' removed");
   });
+
   // db.Petition.drop();
   // db.Petition.destroy({ force: true })
   // mongoose.connection.db.dropCollection('Petition', function(err, result) {});
@@ -60,9 +66,8 @@ app.listen(PORT, function() {
 
   //charityPopulator();
   fetchPetition.scrapePetitions();
-  charityPopulator();
   fetchEvent.scrapeEvents();
   //console.log(`These are the scrape events` + fetchEvent.scrapeEvents());
   //console.log(`These are the scrape events ${fetchEvent.scrapeEvents()}`);
-  });
+  }); //end of node-cron job
 });

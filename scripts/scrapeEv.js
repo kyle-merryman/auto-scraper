@@ -61,7 +61,7 @@ var getEvent = function(keyword) {
 
 /*-------------------------------------------------------------*/
 var eventCounter = function() {
-    var keywords = ["climate-change", "veterans", "homeless"];
+    var keywords = ["climate-change", "military-veterans", "homeless"];
     const indexLim = keywords.length;
     // console.log(indexLim);
 
@@ -74,16 +74,17 @@ var eventCounter = function() {
         counter++ 
         eventCounter();
     } else {
-        return;
+        return events;
     }
 }
 
-eventCounter();
+//eventCounter();
 console.log(events);
+//return events
 /*-------------------------------------------------------------*/
 } //end of scrapeEv()
 /*-------------------------------------------------------------*/
-scrapeEv();
+//scrapeEv();
 
 //export
 module.exports = scrapeEv;
