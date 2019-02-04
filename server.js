@@ -8,8 +8,10 @@ var express = require("express");
 const cron = require("node-cron");
 var mongoose = require("mongoose");
 //var exphbs = require("express-handlebars");
-var fetchController = require("./controllers/fetch");
+var fetchPetition = require("./controllers/fetchPet");
+var fetchEvent = require("./controllers/fetchEv");
 var charityPopulator = require("./scripts/charityOrg");
+var db = require("./models");
 
 // Set up our port to be either the host's designated port, or 3000
 var PORT = process.env.PORT || 3000;
@@ -41,12 +43,26 @@ mongoose.connect(MONGODB_URI);
 
 // Listen on the port
 app.listen(PORT, function() {
-  cron.schedule("*/3 * * * * *", function(){
+  cron.schedule("*/10 * * * * *", function(){
   console.log("Listening on port: " + PORT);
+
+  db.Petition.remove({}, function(err) { 
+    console.log("collection 'Petition' removed");
+  });
+  db.Event.remove({}, function(err) { 
+    console.log("collection 'Event' removed");
+  });
+  // db.Petition.drop();
+  // db.Petition.destroy({ force: true })
+  // mongoose.connection.db.dropCollection('Petition', function(err, result) {});
+  // db.Petition.deleteMany({});
+  // db.Event.deleteMany({});
+
+  //charityPopulator();
+  fetchPetition.scrapePetitions();
   charityPopulator();
-  fetchController.scrapePetitions();
-  fetchController.scrapeEvents();
-  console.log(`These are the scrape events` + fetchController.scrapeEvents());
-  //console.log(`These are the scrape events ${fetchController.scrapeEvents()}`);
+  fetchEvent.scrapeEvents();
+  //console.log(`These are the scrape events` + fetchEvent.scrapeEvents());
+  //console.log(`These are the scrape events ${fetchEvent.scrapeEvents()}`);
   });
 });

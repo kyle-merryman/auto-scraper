@@ -9,11 +9,15 @@ var Schema = mongoose.Schema;
 
 // Create the headlineSchema with our schema class
 var eventSchema = new Schema({
+  keyword: {
+    type: String,
+    required: false
+  },
   // headline, a string, must be entered
   title: {
     type: String,
     required: true,
-    //unique: { index: { unique: true } }
+    unique: { index: { unique: true } }
   },
   // summary, a string, must be entered
   summary: {
