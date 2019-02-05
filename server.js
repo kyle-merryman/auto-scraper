@@ -44,11 +44,11 @@ mongoose.connect(MONGODB_URI);
 // Listen on the port
 app.listen(PORT, function() {
   db.Charity.remove({}, function(err) { 
-    console.log("collection 'Event' removed");
+    console.log("collection 'Charity' removed");
   });
   charityPopulator();
 
-  cron.schedule("*/10 * * * * *", function(){
+  cron.schedule("*/30 * * * * *", function(){
   console.log("Listening on port: " + PORT);
 
   db.Petition.remove({}, function(err) { 
@@ -57,12 +57,6 @@ app.listen(PORT, function() {
   db.Event.remove({}, function(err) { 
     console.log("collection 'Event' removed");
   });
-
-  // db.Petition.drop();
-  // db.Petition.destroy({ force: true })
-  // mongoose.connection.db.dropCollection('Petition', function(err, result) {});
-  // db.Petition.deleteMany({});
-  // db.Event.deleteMany({});
 
   //charityPopulator();
   fetchPetition.scrapePetitions();

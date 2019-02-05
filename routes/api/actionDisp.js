@@ -8,3 +8,5 @@ router.get("/petition/:id", petitionController.filterPet);
 router.get("/event/:id", eventController.filterEve);
 
 module.exports = router;
+
+//try /api/charity/climate-change

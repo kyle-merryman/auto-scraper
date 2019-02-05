@@ -5,12 +5,15 @@ var scrapePet = require("../scripts/scrapePet");
 
 module.exports = {
   scrapePetitions: function(req, res) {
+    var keywords = ["climate-change", "military-veterans", "homeless"];
+
+    for(i = 0; i < keywords.length; i++) {
     console.log("hit scrapePetitions");
     // scrape the NYT
-    return scrapePet().then(function(articles) {
+    /*return*/ scrapePet(keywords[i]).then(function(petitions) {
         // then insert articles into the db
         console.log("...INSERTING Petitions into db");
-        return db.Petition.create(articles);
+        return db.Petition.create(petitions);
       }).then(function(dbPetition) {
         if (dbPetition.length === 0) {
         
@@ -23,5 +26,6 @@ module.exports = {
         // This query won't insert articles with duplicate headlines, but it will error after inserting the others
         
       });
+    }; //end of FOR LOOP
   }
 };

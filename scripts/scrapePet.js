@@ -8,16 +8,16 @@ var cheerio = require("cheerio");
 
 
 // This function will scrape the Change.org website
-var scrapePet = function() {
+var scrapePet = function(keyword) {
   // console.log("hit scrapePet");
   //new CronJob('*/30 * * * * *', function(){
   // Scrape the NYTimes website
   //return 
-  return axios.get("https://www.change.org/search?q=climate-change").then(function(res) {
+  return axios.get("https://www.change.org/search?q=" + keyword).then(function(res) {
     var $ = cheerio.load(res.data);
     //console.log($);
     // Make an empty array to save our article info
-    var articles = [];
+    var petitions = [];
 
     // Now, find and loop through each element that has the "css-180b3ld" class
     // (i.e, the section holding the articles)
@@ -55,7 +55,7 @@ var scrapePet = function() {
         // Initialize an object we will push to the articles array
 
         var dataToAdd = {
-          keyword: "climate-change",
+          keyword: keyword,
           title: titleNeat,
           summary: sumNeat,
           url: "https://www.change.org" + url
@@ -64,14 +64,14 @@ var scrapePet = function() {
         // console.log(`This is the petition data`);
         // console.log(dataToAdd);
 
-        articles.push(dataToAdd);
+        petitions.push(dataToAdd);
         // console.log("This is the petition table");
         // console.log(articles);
       }
     //} //end of while loop 
     });
     // console.log(articles);
-    return articles;
+    return petitions;
   });
 //}); //CronJob
 };
